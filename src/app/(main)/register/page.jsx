@@ -1,11 +1,37 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import { Alata } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter()
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const image = e.target.image.value;
+
+    const { data, error } = await authClient.signUp.email({
+      name,
+      email,
+      password,
+      image,
+    });
+
+    if (data) {
+      alert("Register Success");
+      router.push('/')
+    } else {
+      alert("Register Fail");
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-5">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl">
@@ -17,7 +43,7 @@ const RegisterForm = () => {
           </p>
         </div>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={onSubmit}>
           <div>
             <label className="block mb-2 font-medium text-gray-700">
               Full Name
@@ -52,6 +78,7 @@ const RegisterForm = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="Enter your password"
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 pr-12 outline-none focus:border-[#004A99] transition"
               />

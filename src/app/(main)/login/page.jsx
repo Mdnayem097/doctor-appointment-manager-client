@@ -1,11 +1,30 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const onSubmit = async (e) => {
+      e.preventDefault();
+  
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+  
+      const { data, error } = await authClient.signIn.email({
+        email,
+        password,
+        callbackURL: '/'
+      });
+  console.log(data, error)
+      if (data) {
+        alert("Login Success");
+      } else {
+        alert("Login Fail");
+      }
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-5">
@@ -22,7 +41,7 @@ const LoginForm = () => {
           </p>
         </div>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={onSubmit}>
 
           <div>
             <label className="block mb-2 font-medium text-gray-700">
@@ -32,6 +51,7 @@ const LoginForm = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              name="email"
               className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-[#004A99] transition"
             />
           </div>
@@ -46,6 +66,7 @@ const LoginForm = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
+                name="password"
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 pr-12 outline-none focus:border-[#004A99] transition"
               />
 
