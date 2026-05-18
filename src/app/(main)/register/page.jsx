@@ -22,7 +22,7 @@ const RegisterForm = () => {
       name,
       email,
       password,
-      image,
+      image: image || "",
     });
 
     if (data) {
