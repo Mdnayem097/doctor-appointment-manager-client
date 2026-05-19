@@ -6,6 +6,7 @@ import UpdateModal from "@/components/UpdateAppointment";
 export default function DashboardPage() {
   const [appointments, setAppointments] = useState([]);
 
+  // 🔥 FETCH DATA
   const getAppointments = async () => {
     const res = await fetch("http://localhost:5000/appointments");
     const data = await res.json();
@@ -16,49 +17,81 @@ export default function DashboardPage() {
     getAppointments();
   }, []);
 
+  // 🗑 DELETE FUNCTION
+  const handleDelete = async (id) => {
+    const confirmDelete = confirm("Are you sure you want to delete?");
+    if (!confirmDelete) return;
+
+    await fetch(`http://localhost:5000/appointments/${id}`, {
+      method: "DELETE",
+    });
+
+    getAppointments(); // 🔥 refresh UI after delete
+  };
+
   return (
-    <div className="min-h-screen p-5 w-10/12 m-auto">
-      <h1 className="mb-6 text-4xl font-bold">Dashboard</h1>
+    <div className="min-h-screen bg-[#f4f7f8] px-6 py-10">
+      
+      <div className="max-w-6xl mx-auto">
 
-      <div className="mb-8 flex gap-3">
-        <button className="rounded-full bg-white px-5 py-2 text-sm font-semibold shadow">
-          My Booking
-        </button>
+        {/* TITLE */}
+        <h1 className="mb-6 text-4xl font-bold">Dashboard</h1>
 
-        <button className="rounded-full bg-gray-200 px-5 py-2 text-sm font-semibold text-gray-700">
-          My Profile
-        </button>
-      </div>
+        {/* BUTTONS */}
+        <div className="mb-8 flex gap-3">
+          <button className="rounded-full bg-white px-5 py-2 text-sm font-semibold shadow">
+            My Booking
+          </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-10/12 m-auto">
-        {appointments.map((appointment) => (
-          <div
-            key={appointment._id}
-            className="max-w-md rounded-2xl border border-[#004A99]  bg-[#f4f7f8] p-6 shadow-sm"
-          >
-            <h2 className="text-xl font-bold text-[#009966]">
-              {appointment.doctorName}
-            </h2>
+          <button className="rounded-full bg-gray-200 px-5 py-2 text-sm font-semibold text-gray-700">
+            My Profile
+          </button>
+        </div>
 
-            <div className="text-sm text-gray-700 space-y-1">
-              <p>Patient: {appointment.patientName}</p>
-              <p>Date: {appointment.date}</p>
-              <p>Time: {appointment.time}</p>
-              <p>Reason: {appointment.reason}</p>
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {appointments.map((appointment) => (
+            <div
+              key={appointment._id}
+              className="rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition"
+            >
+              {/* DOCTOR */}
+              <h2 className="text-xl font-bold text-[#009966]">
+                {appointment.doctorName}
+              </h2>
+
+              {/* INFO */}
+              <div className="text-sm text-gray-700 mt-3 space-y-1">
+                <p>Patient: {appointment.patientName}</p>
+                <p>Date: {appointment.date}</p>
+                <p>Time: {appointment.time}</p>
+                <p>Reason: {appointment.reason}</p>
+              </div>
+
+              {/* ACTIONS */}
+              <div className="mt-5 flex gap-3">
+
+                {/* UPDATE */}
+                <UpdateModal
+                  appointments={appointment}
+                  refetch={getAppointments}
+                />
+
+                {/* DELETE */}
+                <button
+                  onClick={() => handleDelete(appointment._id)}
+                  className="rounded-lg bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600 transition"
+                >
+                  Delete
+                </button>
+
+              </div>
             </div>
+          ))}
 
-            <div className="mt-5 flex gap-3">
-              <UpdateModal
-                appointments={appointment}
-                refetch={getAppointments}
-              />
+        </div>
 
-              <button className="rounded-lg bg-red-500 px-4 py-2 text-sm text-white">
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
