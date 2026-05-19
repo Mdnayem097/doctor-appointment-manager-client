@@ -29,86 +29,61 @@ const bannerData = [
 
 const Banner = () => {
   const [current, setCurrent] = useState(0);
-  const [fade, setFade] = useState(true);
 
-  // AUTO SLIDE (15 sec)
   useEffect(() => {
     const interval = setInterval(() => {
-      changeSlide("next");
+      setCurrent((prev) =>
+        prev === bannerData.length - 1 ? 0 : prev + 1
+      );
     }, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const changeSlide = (type) => {
-    setFade(false);
-
-    setTimeout(() => {
-      setCurrent((prev) => {
-        if (type === "next") {
-          return prev === bannerData.length - 1 ? 0 : prev + 1;
-        } else {
-          return prev === 0 ? bannerData.length - 1 : prev - 1;
-        }
-      });
-
-      setFade(true);
-    }, 1000); 
-  };
+  const slide = bannerData[current];
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full h-[70vh]">
 
-      <div className="relative h-[300px] md:h-[650px] w-full overflow-hidden">
+      <Image
+        src={slide.image}
+        alt="banner"
+        fill
+        priority
+        className="object-cover"
+      />
 
-        <div
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-            fade ? "opacity-100 scale-100" : "opacity-0 scale-105"
-          }`}
-        >
-          <Image
-            src={bannerData[current].image}
-            alt="banner"
-            fill
-            className="object-cover"
-          />
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      <div className="absolute inset-0 flex items-center">
+        <div className="w-10/12 mx-auto text-white">
+
+          <h1 className="text-3xl md:text-6xl font-bold mb-4">
+            {slide.title}
+          </h1>
+
+          <p className="text-gray-200 text-sm md:text-lg max-w-xl">
+            {slide.description}
+          </p>
+
+          <button className="mt-6 bg-[#004A99] hover:bg-[#00397a] px-7 py-3 rounded-full font-semibold transition">
+            {slide.button}
+          </button>
+
         </div>
-
-        <div className="absolute inset-0 bg-black/50"></div>
-
-        <div className="absolute inset-0 flex items-center">
-          <div className="text-white px-6 md:px-30 max-w-4xl">
-
-            <h1 className="text-4xl md:text-7xl font-bold mb-5">
-              {bannerData[current].title}
-            </h1>
-
-            <p className="text-sm md:text-xl text-gray-200 mb-8">
-              {bannerData[current].description}
-            </p>
-
-            <button className="bg-[#009966] hover:bg-[#007755] px-8 py-3 rounded-full font-semibold">
-              {bannerData[current].button}
-            </button>
-
-          </div>
-        </div>
-
-        <button
-          onClick={() => changeSlide("prev")}
-          className="absolute top-1/2 left-5 -translate-y-1/2 bg-white/20 w-12 h-12 rounded-full text-white text-2xl backdrop-blur-md"
-        >
-          ❮
-        </button>
-
-        <button
-          onClick={() => changeSlide("next")}
-          className="absolute top-1/2 right-5 -translate-y-1/2 bg-white/20 w-12 h-12 rounded-full text-white text-2xl backdrop-blur-md"
-        >
-          ❯
-        </button>
-
       </div>
+
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+        {bannerData.map((_, i) => (
+          <div
+            key={i}
+            className={`h-1 w-8 rounded-full transition-all duration-300 ${
+              i === current ? "bg-[#009966]" : "bg-white/30"
+            }`}
+          />
+        ))}
+      </div>
+
     </div>
   );
 };

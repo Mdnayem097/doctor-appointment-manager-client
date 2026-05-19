@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+h5{
+    font-size: small;
+}
