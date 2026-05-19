@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
-
+@import "react-datepicker/dist/react-datepicker.css";
 h5{
     font-size: small;
 }
