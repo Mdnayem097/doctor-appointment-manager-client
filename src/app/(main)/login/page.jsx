@@ -19,7 +19,8 @@ const LoginForm = () => {
       password,
       callbackURL: "/",
     });
-    console.log(data, error);
+    const { data:tokenData } = await authClient.token()
+    console.log(tokenData)
     if (data) {
       alert("Login Success");
     } else {

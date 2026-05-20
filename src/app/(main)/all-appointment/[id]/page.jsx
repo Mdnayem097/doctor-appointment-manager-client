@@ -3,12 +3,20 @@ import Link from "next/link";
 import { FaClock, FaHospital, FaMapMarkerAlt, FaUserMd } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import AppointmentModal from "../../book-appointment/page";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 const DoctorDetails = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
 
   const res = await fetch(`http://localhost:5000/all-appointment/${id}`, {
     cache: "no-store",
+    headers: {
+      authorization: `bearer ${token}`
+    }
   });
 
   const doctor = await res.json();
