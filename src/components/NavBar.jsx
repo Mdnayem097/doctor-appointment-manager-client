@@ -17,7 +17,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="w-full max-lg:collapse lg:px-10 lg:m-auto border-b border-gray-200 bg-white">
+    <div className="w-full max-lg:collapse lg:px-10 lg:m-auto border-b border-gray-200 bg-gradient-to-b from-[#081522] to-[#050b14] text-white">
       <input id="navbar-1-toggle" className="peer hidden" type="checkbox" />
 
       <label
@@ -119,7 +119,8 @@ const NavBar = () => {
                 onClick={handleSignOut}
                 className="flex items-center gap-1.5 border border-red-500 px-4 py-2 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition"
               >
-                <FiLogOut />Logout
+                <FiLogOut />
+                Logout
               </button>
             </div>
           )}
@@ -129,15 +130,36 @@ const NavBar = () => {
       <div className="collapse-content lg:hidden">
         <ul className="menu font-semibold space-y-2">
           <li>
-            <Link href="/">Home</Link>
+            <Link
+              href="/"
+              className={pathname === "/" ? "text-[#009966] font-bold" : ""}
+            >
+              Home
+            </Link>
           </li>
 
           <li>
-            <Link href="/all-appointment">All Appointment</Link>
+            <Link
+              href="/all-appointment"
+              className={
+                pathname === "/all-appointment"
+                  ? "text-[#009966] font-bold"
+                  : ""
+              }
+            >
+              All Appointment
+            </Link>
           </li>
 
           <li>
-            <Link href="/dashboard">Dashboard</Link>
+            <Link
+              href="/dashboard"
+              className={
+                pathname === "/dashboard" ? "text-[#009966] font-bold" : ""
+              }
+            >
+              Dashboard
+            </Link>
           </li>
         </ul>
       </div>
