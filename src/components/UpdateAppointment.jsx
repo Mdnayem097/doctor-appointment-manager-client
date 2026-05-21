@@ -44,7 +44,7 @@ const UpdateModal = ({ appointments, refetch }) => {
       setLoading(true);
 
       await fetch(
-        `http://localhost:5000/appointments/${appointments._id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/${appointments._id}`,
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },

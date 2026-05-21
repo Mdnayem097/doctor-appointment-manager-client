@@ -17,7 +17,7 @@ const AllAppointmentPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/all-appointment");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`);
         const data = await res.json();
 
         setPosts(data);

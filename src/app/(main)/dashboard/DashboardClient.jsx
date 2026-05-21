@@ -29,7 +29,7 @@ export default function DashboardPage() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:5000/appointments");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/appointments`);
 
       if (!res.ok) {
         throw new Error("Failed to fetch appointments");
@@ -62,7 +62,7 @@ export default function DashboardPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/appointments/${id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/${id}`,
         {
           method: "DELETE",
         }

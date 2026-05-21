@@ -5,7 +5,7 @@ import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const TopDoctor = async () => {
-  const res = await fetch("http://localhost:5000/all-appointment", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`, {
     cache: "no-store",
   });
 

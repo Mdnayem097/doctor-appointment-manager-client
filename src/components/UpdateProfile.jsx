@@ -23,7 +23,7 @@ const UpdateProfile = ({ user, setProfile }) => {
       setLoading(true);
 
       const res = await fetch(
-        `http://localhost:5000/users/${user.email}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/${user.email}`,
         {
           method: "PATCH",
           headers: {

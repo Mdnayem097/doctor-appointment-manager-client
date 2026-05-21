@@ -8,7 +8,7 @@ import { auth } from "@/lib/auth";
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const res = await fetch(
-    `http://localhost:5000/all-appointment/${params.id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment/${params.id}`,
     { cache: "no-store" }
   );
 
@@ -27,7 +27,7 @@ const DoctorDetails = async ({ params }) => {
     headers: await headers()
   })
 
-  const res = await fetch(`http://localhost:5000/all-appointment/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment/${id}`, {
     cache: "no-store",
     headers: {
       authorization: `Bearer ${token}`

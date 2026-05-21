@@ -22,7 +22,7 @@ const AppointmentModal = ({ doctor, user }) => {
       reason: form.reason.value,
     };
 
-    const res = await fetch("http://localhost:5000/appointments", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/appointments`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
