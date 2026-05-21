@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
-const UpdateProfile = ({ user }) => {
+const UpdateProfile = ({ user, setProfile }) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+
+    if (loading) return;
 
     const form = e.target;
 
@@ -15,53 +19,73 @@ const UpdateProfile = ({ user }) => {
       image: form.image.value,
     };
 
-    const res = await fetch(
-      `http://localhost:5000/users/${user?.email}`,
-      {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `http://localhost:5000/users/${user.email}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Update failed");
       }
-    );
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log(data);
+      if (data.modifiedCount > 0) {
+        // INSTANT UI UPDATE
+        setProfile((prev) => ({
+          ...prev,
+          ...updatedUser,
+        }));
 
-    alert("Profile Updated!");
+        toast.success(
+          "Profile Updated Successfully ✅"
+        );
 
-    setOpen(false);
+        setOpen(false);
+      } else {
+        toast("Nothing changed ⚠️");
+      }
+    } catch (error) {
+      console.log(error);
 
-    window.location.reload();
+      toast.error("Something went wrong ❌");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
-    "w-full border-2 border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-[#004A99] transition";
+    "w-full rounded-xl border-2 border-gray-300 px-4 py-3 outline-none transition focus:border-[#004A99]";
 
   return (
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="mt-3 bg-[#004A99] hover:bg-[#00397a] text-white font-semibold w-full py-3 rounded-xl transition duration-300"
+        className="mt-3 w-full rounded-xl bg-[#004A99] py-3 font-semibold text-white hover:bg-[#00397a]"
       >
         Update Profile
       </button>
 
       {open && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4 z-50">
-
-          <div className="bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
-
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="relative w-full max-w-md rounded-xl bg-white p-6">
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl"
+              className="absolute right-3 top-2 text-xl"
             >
               ✕
             </button>
 
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            <h2 className="mb-4 text-xl font-bold">
               Update Profile
             </h2>
 
@@ -69,42 +93,33 @@ const UpdateProfile = ({ user }) => {
               onSubmit={handleUpdateProfile}
               className="space-y-4"
             >
+              <input
+                type="text"
+                name="name"
+                defaultValue={user?.name}
+                placeholder="Enter your name"
+                className={inputClass}
+                required
+              />
 
-              <div>
-                <label className="text-sm text-gray-500 mb-1 block">
-                  Full Name
-                </label>
-
-                <input
-                  type="text"
-                  name="name"
-                  defaultValue={user?.name}
-                  placeholder="Enter your name"
-                  className={inputClass}
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-500 mb-1 block">
-                  Image URL
-                </label>
-
-                <input
-                  type="text"
-                  name="image"
-                  defaultValue={user?.image}
-                  placeholder="Enter image url"
-                  className={inputClass}
-                />
-              </div>
+              <input
+                type="text"
+                name="image"
+                defaultValue={user?.image}
+                placeholder="Enter image URL"
+                className={inputClass}
+                required
+              />
 
               <button
                 type="submit"
-                className="w-full bg-[#004A99] hover:bg-[#00397a] text-white py-3 rounded-xl font-semibold transition duration-300"
+                disabled={loading}
+                className="w-full rounded-xl bg-[#004A99] py-3 text-white disabled:opacity-50"
               >
-                Save Changes
+                {loading
+                  ? "Updating..."
+                  : "Save Changes"}
               </button>
-
             </form>
           </div>
         </div>

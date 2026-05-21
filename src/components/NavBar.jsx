@@ -13,8 +13,9 @@ const NavBar = () => {
   const user = userData.data?.user;
 
   const handleSignOut = async () => {
-    await authClient.signOut();
-  };
+  await authClient.signOut();
+  window.location.reload();
+};
 
   return (
     <div className="w-full max-lg:collapse lg:px-10 lg:m-auto border-b border-gray-200 bg-gradient-to-b from-[#081522] to-[#050b14] text-white">

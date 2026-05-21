@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const UpdateModal = ({ appointments, refetch }) => {
   const [open, setOpen] = useState(false);
@@ -51,14 +52,14 @@ const UpdateModal = ({ appointments, refetch }) => {
         }
       );
 
-      alert("Updated Successfully!");
+      toast.success("Updated successfully");
 
       refetch();
 
       setOpen(false);
     } catch (err) {
       console.log(err);
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }

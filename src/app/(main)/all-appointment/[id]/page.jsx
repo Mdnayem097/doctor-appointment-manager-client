@@ -1,10 +1,25 @@
 import Image from "next/image";
-import Link from "next/link";
-import { FaClock, FaHospital, FaMapMarkerAlt, FaUserMd } from "react-icons/fa";
+import { FaHospital, FaMapMarkerAlt, FaUserMd } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import AppointmentModal from "../../book-appointment/page";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const res = await fetch(
+    `http://localhost:5000/all-appointment/${params.id}`,
+    { cache: "no-store" }
+  );
+
+  const doctor = await res.json();
+  console.log("DOCTOR:", doctor);
+
+  return {
+    title: `${doctor.name} | Doctor Details`,
+    description: `View details of ${doctor.name} and book appointment easily`,
+  };
+}
 
 const DoctorDetails = async ({ params }) => {
   const { id } = await params;
@@ -15,7 +30,7 @@ const DoctorDetails = async ({ params }) => {
   const res = await fetch(`http://localhost:5000/all-appointment/${id}`, {
     cache: "no-store",
     headers: {
-      authorization: `bearer ${token}`
+      authorization: `Bearer ${token}`
     }
   });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AppointmentModal = ({ doctor, user }) => {
   const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ const AppointmentModal = ({ doctor, user }) => {
     const result = await res.json();
     console.log(result);
 
-    alert("Appointment Booked!");
+    toast.success("Appointment Booked!");
     form.reset();
     setOpen(false);
   };
