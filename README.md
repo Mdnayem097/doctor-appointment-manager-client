@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 DocAppoint
 
-## Getting Started
+DocAppoint is a modern Doctor Appointment Management System that allows users to browse doctors, view detailed information, and easily book online appointments. Users can also manage their bookings and update their profile.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 👨‍⚕️ Browse and search doctors  
+- 📄 View detailed doctor profiles (experience, hospital, fee, availability)  
+- 📅 Book appointments easily  
+- 🧾 Manage (view, update, delete) appointments  
+- 👤 User profile management  
+- 🔐 Secure authentication system  
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 Project Goal
 
-## Learn More
+The main goal of this project is to build a simple, fast, and user-friendly healthcare appointment system where patients can easily find doctors and book appointments online.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- ⚛️ Next.js (Frontend)  
+- 🟢 Node.js / Express (Backend)  
+- 🍃 MongoDB (Database)  
+- 🔐 Better Auth (Session-based Authentication)  
+- 🔐 JWT (Token-based API Authorization)  
+- 🎨 Tailwind CSS (UI Design)  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📱 Application Flow
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. User registers / logs in using Better Auth  
+2. Session is managed via Better Auth  
+3. JWT token is used for secure API requests  
+4. Browse doctor list  
+5. View doctor details  
+6. Book appointment  
+7. Manage appointments & profile  
+
+---
+
+## 🔐 Authentication System
+
+### 🔹 Better Auth (Session Management)
+- Handles login/logout  
+- Manages user sessions securely  
+- Integrated with Next.js frontend  
+
+### 🔹 JWT (API Security)
+- Secures backend API routes  
+- Passed via Authorization header  
+- Used for verifying protected requests  
+
+---
+
+## 🌐 Live Demo
+
+👉 Live Site: https://your-live-link.com  
+
+---
+
+## 📞 Contact
+
+- Email: your-email@example.com  
+- GitHub: https://github.com/your-username  
+
+---
+
+## ⭐ Support
+
+If you find this project helpful or interesting, feel free to ⭐ star the repository.
+Your support helps me stay motivated and continue building more real-world projects.
