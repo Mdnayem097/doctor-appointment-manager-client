@@ -7,7 +7,6 @@ const Footer = ({ logo }) => {
     <footer className="bg-gradient-to-b from-[#081522] to-[#050b14] text-white pt-14 pb-6">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
         <div>
-          {/* Logo */}
           <div className="flex items-center gap-3 mb-4">
             <Image
               src="/logo.png"
@@ -23,7 +22,6 @@ const Footer = ({ logo }) => {
           </p>
         </div>
 
-        {/* Services */}
         <div>
           <h2 className="text-xl font-semibold mb-5">Services</h2>
 
@@ -43,7 +41,6 @@ const Footer = ({ logo }) => {
           </ul>
         </div>
 
-        {/* Social Media */}
         <div>
           <h2 className="text-xl font-semibold mb-5">Follow Us</h2>
 

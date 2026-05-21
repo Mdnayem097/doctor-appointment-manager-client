@@ -5,21 +5,10 @@ import AppointmentModal from "../../book-appointment/page";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment/${params.id}`,
-    { cache: "no-store" }
-  );
-
-  const doctor = await res.json();
-  console.log("DOCTOR:", doctor);
-
-  return {
-    title: `${doctor.name} | Doctor Details`,
-    description: `View details of ${doctor.name} and book appointment easily`,
-  };
-}
+export const metadata = {
+  title: "Doctor Details | DocAppoint",
+  description: "View detailed information about a doctor",
+};
 
 const DoctorDetails = async ({ params }) => {
   const { id } = await params;

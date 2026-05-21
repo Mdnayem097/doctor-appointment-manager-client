@@ -40,14 +40,13 @@ const UpdateProfile = ({ user, setProfile }) => {
       const data = await res.json();
 
       if (data.modifiedCount > 0) {
-        // INSTANT UI UPDATE
         setProfile((prev) => ({
           ...prev,
           ...updatedUser,
         }));
 
         toast.success(
-          "Profile Updated Successfully ✅"
+          "Profile Updated Successfully "
         );
 
         setOpen(false);
@@ -57,7 +56,7 @@ const UpdateProfile = ({ user, setProfile }) => {
     } catch (error) {
       console.log(error);
 
-      toast.error("Something went wrong ❌");
+      toast.error("Something went wrong ");
     } finally {
       setLoading(false);
     }

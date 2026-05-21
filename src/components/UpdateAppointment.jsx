@@ -77,7 +77,6 @@ const UpdateModal = ({ appointments, refetch }) => {
         Update
       </button>
 
-      {/* MODAL */}
       {open && (
         <div
           onClick={closeModal}
@@ -87,7 +86,6 @@ const UpdateModal = ({ appointments, refetch }) => {
             onClick={(e) => e.stopPropagation()}
             className="bg-white w-full max-w-md rounded-2xl p-6 relative"
           >
-            {/* CLOSE */}
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 text-xl text-gray-500 hover:text-red-500"

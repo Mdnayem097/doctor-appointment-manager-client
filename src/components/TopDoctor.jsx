@@ -5,14 +5,15 @@ import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const TopDoctor = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`,
+    {
+      cache: "no-store",
+    },
+  );
 
   const posts = await res.json();
-  const topDoctors = posts
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 3);
+  const topDoctors = posts.sort((a, b) => b.rating - a.rating).slice(0, 3);
 
   return (
     <div className="mb-1 mt-16">
@@ -41,7 +42,10 @@ const TopDoctor = async () => {
             </div>
 
             <div className="mt-4 space-y-2">
-              <h2 className="font-bold text-xl">{res.name}</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="font-bold text-xl">{res.name}</h2>
+                <h2 className="font-bold text-green-600 gap-1">⭐{res.rating}</h2>
+              </div>
               <p className="text-[#009966] font-semibold">{res.specialty}</p>
               <p className="text-sm text-gray-500 py-4">{res.description}</p>
 

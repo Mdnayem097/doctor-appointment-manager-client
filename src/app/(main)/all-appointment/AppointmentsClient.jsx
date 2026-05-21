@@ -17,7 +17,9 @@ const AllAppointmentPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/all-appointment`,
+        );
         const data = await res.json();
 
         setPosts(data);
@@ -84,11 +86,14 @@ const AllAppointmentPage = () => {
             </div>
 
             <div className="mt-4 space-y-2">
-              <h2 className="font-bold text-xl">{res.name}</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="font-bold text-xl">{res.name}</h2>
+                <h2 className="font-bold text-green-600 gap-1">
+                  ⭐{res.rating}
+                </h2>
+              </div>
               <p className="text-[#009966] font-semibold">{res.specialty}</p>
-              <p className="text-sm text-gray-500 py-4">
-                {res.description}
-              </p>
+              <p className="text-sm text-gray-500 py-4">{res.description}</p>
 
               <p className="flex items-center gap-1.5 text-sm text-gray-600">
                 <FaMapMarkerAlt className="text-[#009966]" />

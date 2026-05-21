@@ -60,14 +60,16 @@ The main goal of this project is to build a simple, fast, and user-friendly heal
 
 ## 🌐 Live Demo
 
-👉 Live Site: https://your-live-link.com  
+👉 Live Site: https://doctor-appointment-manager-client.vercel.app
+👉 Server Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-sarver
+👉 Client Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-client
 
 ---
 
 ## 📞 Contact
 
-- Email: your-email@example.com  
-- GitHub: https://github.com/your-username  
+- Email: mdneloy097@gmail.com 
+- GitHub: https://github.com/Mdnayem097
 
 ---
 
