@@ -66,13 +66,13 @@ Although the application worked perfectly in the local development environment, 
 
 I spent nearly 10 hours debugging the issue and researching possible solutions. Eventually, I identified that the issue was related to DNS/network resolution during the authentication process.
 
-🛠️ Solution
+### 🛠️ Solution
 
 To resolve the issue, I added custom DNS configuration inside the client-side auth.js setup using Node.js DNS module:
 
-import dns from "node:dns";
+- import dns from "node:dns";
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+- dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 After pushing this fix and redeploying the project on Vercel, the application started working correctly in the production environment.
 
@@ -80,9 +80,11 @@ After pushing this fix and redeploying the project on Vercel, the application st
 
 ## 🌐 Live Demo
 
-👉 Live Site: https://doctor-appointment-manager-client.vercel.app
-👉 Server Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-sarver
-👉 Client Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-client
+- 👉 Live Site: https://doctor-appointment-manager-client.vercel.app
+
+- 👉 Server Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-sarver
+
+- 👉 Client Repo Link: https://github.com/Mdnayem097/doctor-appointment-manager-client
 
 ---
 
